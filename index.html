@@ -4,8 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trưởng phòng Kế hoạch - Ratraco Transport</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Ratraco Transport - Công ty vận tải hàng đầu Việt Nam. Chuyên cung cấp dịch vụ vận tải đa phương thức, logistics và chuỗi cung ứng toàn cầu.">
+    <meta name="keywords" content="Ratraco Transport, vận tải, logistics, chuỗi cung ứng, vận chuyển hàng hóa, công ty vận tải Việt Nam">
+    <meta name="author" content="Ratraco Transport">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.ratraco.com/">
+    <meta property="og:title" content="Ratraco Transport - Công ty Vận tải Hàng đầu Việt Nam">
+    <meta property="og:description" content="Cung cấp dịch vụ vận tải đa phương thức, logistics và chuỗi cung ứng toàn cầu.">
+    <meta property="og:image" content="https://www.ratraco.com/images/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.ratraco.com/">
+    <meta property="twitter:title" content="Ratraco Transport - Công ty Vận tải Hàng đầu Việt Nam">
+    <meta property="twitter:description" content="Cung cấp dịch vụ vận tải đa phương thức, logistics và chuỗi cung ứng toàn cầu.">
+    <meta property="twitter:image" content="https://www.ratraco.com/images/twitter-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    <!-- Loading Animation -->
+    <style>
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FF7E5F 0%, #FEB47B 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-logo {
+            width: 150px;
+            height: 150px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .favicon-animation {
+            animation: faviconRotate 2s infinite linear;
+        }
+        
+        @keyframes faviconRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
@@ -24,12 +94,12 @@
         }
         
         .card-hover {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
         }
         
         .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: translateY(-8px) scale(1.02); /* Added scale for more depth */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35); /* Stronger shadow on hover */
         }
         
         .floating-animation {
@@ -41,23 +111,37 @@
             50% { transform: translateY(-10px); }
         }
         
+        /* New: Scale In animation */
+        .scale-in {
+            animation: scaleIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Refined Fade In */
         .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
+            animation: fadeIn 1s ease-out forwards;
             opacity: 0;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
+        /* Refined Slide In Left */
         .slide-in-left {
-            animation: slideInLeft 0.8s ease-out forwards;
+            animation: slideInLeft 1s ease-out forwards;
             opacity: 0;
         }
         
         @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
+            from { opacity: 0; transform: translateX(-60px); }
             to { opacity: 1; transform: translateX(0); }
         }
         
@@ -123,11 +207,13 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            height: auto; /* Adjusted for better responsiveness */
+            min-height: 280px; /* Ensure minimum height */
         }
         
         .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px) scale(1.02); /* Consistent with card-hover */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Consistent with card-hover */
         }
         
         .skill-image {
@@ -184,7 +270,7 @@
         
         .achievement-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax for better fit */
             gap: 2rem;
         }
         
@@ -196,6 +282,8 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            height: auto; /* Adjusted for better responsiveness */
+            min-height: 350px; /* Ensure minimum height */
         }
         
         .achievement-card:hover {
@@ -321,9 +409,30 @@
         
         .skill-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax for better fit */
             gap: 1.5rem;
             height: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .skill-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .skill-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .skill-card {
+                margin-bottom: 1rem;
+            }
+            
+            .skill-image {
+                height: 200px;
+            }
         }
         
         .skill-card {
@@ -358,6 +467,23 @@
             transition: all 0.3s ease;
             text-decoration: none;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative; /* Added for overflow hidden effect */
+            overflow: hidden; /* Added for shimmer effect */
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); /* Shimmer effect */
+            transition: left 0.5s ease-in-out;
+        }
+
+        .contact-btn:hover::before {
+            left: 100%;
         }
 
         .contact-btn:hover {
@@ -392,9 +518,131 @@
         .facebook-bg:hover {
             background-color: #1562C7;
         }
+
+        /* New/Refined styles for professionalism and responsiveness */
+        .section-heading {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .section-subheading {
+            text-align: center;
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .partner-logo-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Added subtle shadow */
+        }
+
+        .partner-logo-wrapper:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.1); /* Slightly more opaque on hover */
+        }
+
+        .partner-logo {
+            max-height: 4rem; /* Adjusted for better visibility */
+            width: auto;
+            filter: grayscale(100%) brightness(150%); /* Subtle grayscale */
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo-wrapper:hover .partner-logo {
+            filter: grayscale(0%) brightness(100%); /* Color on hover */
+            opacity: 1;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        .testimonial-avatar {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #764ba2;
+            margin: 0 auto 1rem auto;
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.2);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: white;
+            font-size: 1.125rem;
+        }
+
+        .testimonial-role {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        /* Staggered animation classes */
+        .staggered-animation-container {
+            /* Use this class on parent of items to be animated */
+        }
+
+        .staggered-animation-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Smooth transition */
+        }
+
+        .staggered-animation-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* @keyframes fadeInUp is no longer needed */
     </style>
 </head>
 <body class="min-h-screen gradient-bg">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" 
+             alt="Ratraco Loading" 
+             class="loading-logo rounded-full">
+    </div>
+
     <!-- Navbar -->
     <nav class="glass-effect fixed top-0 z-50 w-full p-4 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
@@ -446,27 +694,66 @@
     <!-- Main Container -->
     <div class="container mx-auto px-4 py-8 max-w-6xl relative top-20">
         
-        <!-- Hero Section -->
-        <div class="text-center mb-12 fade-in">
-            <div class="inline-block">
-                <!-- <div class="company-name mb-4" data-vi="Ratraco Transport" data-en="Ratraco Transport" data-zh="Ratraco运输">
-                    Ratraco Transport
-                </div> -->
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 text-gradient" data-vi="Trưởng phòng Kế hoạch" data-en="Planning Department Manager" data-zh="计划部经理">
-                    Trưởng phòng Kế hoạch
-                </h1>
-                <div class="w-24 h-1 bg-white mx-auto rounded-full opacity-70"></div>
+        <!-- Hero Section with Video Background -->
+        <div class="relative rounded-3xl overflow-hidden mb-12 fade-in">
+            <div class="absolute inset-0">
+                <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-truck-driving-through-a-city-at-night-4292-large.mp4" type="video/mp4">
+                </video>
+                <div class="absolute inset-0 bg-black bg-opacity-50"></div>
             </div>
-            <p class="text-xl text-white opacity-90 mt-4 max-w-2xl mx-auto" data-vi="Công ty Vận tải Ratraco" data-en="Ratraco Transport Company" data-zh="Ratraco运输公司">
-                Công ty Vận tải Ratraco
+            <div class="relative z-10 text-center py-20 px-4">
+                <div class="inline-block">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 text-gradient" data-vi="Trưởng phòng Kế hoạch" data-en="Planning Department Manager" data-zh="计划部经理">
+                        Trưởng phòng Kế hoạch
+                    </h1>
+                    <div class="w-24 h-1 bg-white mx-auto rounded-full opacity-70"></div>
+                </div>
+                <p class="text-xl text-white opacity-90 mt-4 max-w-2xl mx-auto" data-vi="Công ty Vận tải Ratraco" data-en="Ratraco Transport Company" data-zh="Ratraco运输公司">
+                    Công ty Vận tải Ratraco
+                </p>
+            </div>
+        </div>
+
+        <!-- Company Overview Slider -->
+        <div class="glass-effect rounded-3xl p-8 mb-12 fade-in">
+            <h3 class="text-2xl font-bold text-white mb-6" data-vi="Tổng quan về Ratraco" data-en="Ratraco Overview" data-zh="Ratraco概览">
+                Tổng quan về Ratraco
+            </h3>
+            <p class="text-gray-200 mb-6" data-vi="Ratraco Transport là công ty hàng đầu trong lĩnh vực vận tải và logistics tại Việt Nam, với hơn 15 năm kinh nghiệm. Chúng tôi cung cấp các giải pháp vận chuyển đa phương thức, tối ưu hóa chuỗi cung ứng, và cam kết mang lại dịch vụ chất lượng cao nhất cho khách hàng trên toàn quốc và quốc tế. Sứ mệnh của chúng tôi là kết nối chuỗi giá trị, nâng cao hiệu quả kinh doanh cho đối tác." 
+               data-en="Ratraco Transport is a leading company in the transportation and logistics sector in Vietnam, with over 15 years of experience. We provide multimodal transportation solutions, supply chain optimization, and are committed to delivering the highest quality services to clients nationwide and internationally. Our mission is to connect value chains and enhance business efficiency for our partners." 
+               data-zh="Ratraco运输是越南运输和物流领域的领先公司，拥有超过15年的经验。我们提供多式联运解决方案、供应链优化，并致力于为国内外客户提供最高质量的服务。我们的使命是连接价值链，提高合作伙伴的业务效率。">
+                Ratraco Transport là công ty hàng đầu trong lĩnh vực vận tải và logistics tại Việt Nam, với hơn 15 năm kinh nghiệm. Chúng tôi cung cấp các giải pháp vận chuyển đa phương thức, tối ưu hóa chuỗi cung ứng, và cam kết mang lại dịch vụ chất lượng cao nhất cho khách hàng trên toàn quốc và quốc tế. Sứ mệnh của chúng tôi là kết nối chuỗi giá trị, nâng cao hiệu quả kinh doanh cho đối tác.
             </p>
+            <div class="swiper company-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80" 
+                             alt="Company Overview 1" 
+                             class="w-full h-[400px] object-cover rounded-xl">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80" 
+                             alt="Company Overview 2" 
+                             class="w-full h-[400px] object-cover rounded-xl">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80" 
+                             alt="Company Overview 3" 
+                             class="w-full h-[400px] object-cover rounded-xl">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
         </div>
 
         <!-- Profile Card -->
-        <div class="grid lg:grid-cols-3 gap-8 mb-12" id="profile">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12 fade-in" id="profile">
             <!-- Profile Image & Basic Info -->
             <div class="lg:col-span-1">
-                <div class="glass-effect rounded-3xl p-8 card-hover floating-animation">
+                <div class="glass-effect rounded-3xl p-8 card-hover floating-animation scale-in">
                     <div class="text-center">
                         <div class="w-48 h-48 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 p-1">
                             <div class="w-full h-full rounded-full bg-gray-300 flex items-center justify-center">
@@ -494,9 +781,9 @@
                         Thông tin chi tiết
                     </h3>
                     
-                    <div class="grid md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-4">
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-3 scale-in">
                                 <i class="fas fa-briefcase text-white text-xl w-6"></i>
                                 <div>
                                     <p class="text-gray-200 text-sm" data-vi="Kinh nghiệm" data-en="Experience" data-zh="经验">Kinh nghiệm</p>
@@ -504,7 +791,7 @@
                                 </div>
                             </div>
                             
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-3 scale-in">
                                 <i class="fas fa-graduation-cap text-white text-xl w-6"></i>
                                 <div>
                                     <p class="text-gray-200 text-sm" data-vi="Học vấn" data-en="Education" data-zh="学历">Học vấn</p>
@@ -512,7 +799,7 @@
                                 </div>
                             </div>
                             
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-3 scale-in">
                                 <i class="fas fa-award text-white text-xl w-6"></i>
                                 <div>
                                     <p class="text-gray-200 text-sm" data-vi="Chứng chỉ" data-en="Certification" data-zh="认证">Chứng chỉ</p>
@@ -522,7 +809,7 @@
                         </div>
                         
                         <div class="space-y-4">
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-3 scale-in">
                                 <i class="fas fa-envelope text-white text-xl w-6"></i>
                                 <div>
                                     <p class="text-gray-200 text-sm">Email</p>
@@ -530,7 +817,7 @@
                                 </div>
                             </div>
                             
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-3 scale-in">
                                 <i class="fas fa-phone text-white text-xl w-6"></i>
                                 <div>
                                     <p class="text-gray-200 text-sm" data-vi="Điện thoại" data-en="Phone" data-zh="电话">Điện thoại</p>
@@ -538,7 +825,7 @@
                                 </div>
                             </div>
                             
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-3 scale-in">
                                 <i class="fas fa-map-marker-alt text-white text-xl w-6"></i>
                                 <div>
                                     <p class="text-gray-200 text-sm" data-vi="Văn phòng" data-en="Office" data-zh="办公室">Văn phòng</p>
@@ -546,7 +833,7 @@
                                 </div>
                             </div>
                             
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-3 scale-in">
                                 <i class="fas fa-globe text-white text-xl w-6"></i>
                                 <div>
                                     <p class="text-gray-200 text-sm" data-vi="Website Công ty" data-en="Company Website" data-zh="公司网站">Website Công ty</p>
@@ -559,15 +846,104 @@
             </div>
         </div>
 
+        <!-- IT Department Section -->
+        <div class="glass-effect rounded-3xl p-8 mb-12 fade-in">
+            <h3 class="text-2xl font-bold text-white mb-6" data-vi="Ban Công Nghệ Thông Tin" data-en="IT Department" data-zh="信息技术部门">
+                Ban Công Nghệ Thông Tin
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4" data-vi="Công nghệ hiện đại" data-en="Modern Technology" data-zh="现代技术">
+                        Công nghệ hiện đại
+                    </h4>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-white bg-opacity-10 p-4 rounded-xl text-center scale-in">
+                            <i class="fab fa-aws text-3xl text-white mb-2"></i>
+                            <p class="text-white">AWS Cloud</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 p-4 rounded-xl text-center scale-in">
+                            <i class="fab fa-docker text-3xl text-white mb-2"></i>
+                            <p class="text-white">Docker</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 p-4 rounded-xl text-center scale-in">
+                            <i class="fab fa-react text-3xl text-white mb-2"></i>
+                            <p class="text-white">React</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 p-4 rounded-xl text-center scale-in">
+                            <i class="fab fa-node-js text-3xl text-white mb-2"></i>
+                            <p class="text-white">Node.js</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-200" data-vi="Đội ngũ CNTT của chúng tôi luôn cập nhật và áp dụng những công nghệ mới nhất để đảm bảo hệ thống vận hành hiệu quả và an toàn." 
+                       data-en="Our IT team constantly updates and applies the latest technologies to ensure efficient and secure system operations." 
+                       data-zh="我们的IT团队不断更新和应用最新技术，确保系统高效安全运行。">
+                        Đội ngũ CNTT của chúng tôi luôn cập nhật và áp dụng những công nghệ mới nhất để đảm bảo hệ thống vận hành hiệu quả và an toàn.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4" data-vi="Thành tựu" data-en="Achievements" data-zh="成就">
+                        Thành tựu
+                    </h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                            <p class="text-gray-200" data-vi="Triển khai thành công hệ thống quản lý vận tải thông minh" 
+                               data-en="Successfully implemented smart transportation management system" 
+                               data-zh="成功实施智能运输管理系统">
+                                Triển khai thành công hệ thống quản lý vận tải thông minh
+                            </p>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                            <p class="text-gray-200" data-vi="Đạt chứng chỉ ISO 27001 về bảo mật thông tin" 
+                               data-en="Achieved ISO 27001 certification for information security" 
+                               data-zh="获得ISO 27001信息安全认证">
+                                Đạt chứng chỉ ISO 27001 về bảo mật thông tin
+                            </p>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                            <p class="text-gray-200" data-vi="Giải thưởng Doanh nghiệp Chuyển đổi số xuất sắc 2023" 
+                               data-en="2023 Outstanding Digital Transformation Enterprise Award" 
+                               data-zh="2023年优秀数字化转型企业奖">
+                                Giải thưởng Doanh nghiệp Chuyển đổi số xuất sắc 2023
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h4 class="text-xl font-semibold text-white mb-4" data-vi="Đội ngũ CNTT" data-en="IT Team" data-zh="IT团队">
+                Đội ngũ CNTT
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center staggered-animation-container">
+                <div class="glass-effect rounded-xl p-4 staggered-animation-item">
+                    <img src="https://i.pravatar.cc/150?img=68" alt="Member 1" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
+                    <p class="text-white font-semibold">Trần Văn C</p>
+                    <p class="text-gray-300 text-sm" data-vi="Trưởng nhóm Phát triển" data-en="Development Lead" data-zh="开发主管">Trưởng nhóm Phát triển</p>
+                </div>
+                <div class="glass-effect rounded-xl p-4 staggered-animation-item">
+                    <img src="https://i.pravatar.cc/150?img=69" alt="Member 2" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
+                    <p class="text-white font-semibold">Lê Thị D</p>
+                    <p class="text-gray-300 text-sm" data-vi="Kỹ sư Bảo mật" data-en="Security Engineer" data-zh="安全工程师">Kỹ sư Bảo mật</p>
+                </div>
+                <div class="glass-effect rounded-xl p-4 staggered-animation-item">
+                    <img src="https://i.pravatar.cc/150?img=70" alt="Member 3" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
+                    <p class="text-white font-semibold">Phạm Quang E</p>
+                    <p class="text-gray-300 text-sm" data-vi="Chuyên viên Phân tích Dữ liệu" data-en="Data Analyst" data-zh="数据分析师">Chuyên viên Phân tích Dữ liệu</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Skills & Expertise -->
-        <div class="grid lg:grid-cols-2 gap-8 mb-12" id="skills">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12" id="skills">
             <div class="glass-effect rounded-3xl p-8">
                 <h3 class="text-2xl font-bold text-white mb-6" data-vi="Kỹ năng chuyên môn" data-en="Professional Skills" data-zh="专业技能">
                     Kỹ năng chuyên môn
                 </h3>
                 
-                <div class="skill-grid">
-                    <div class="skill-card">
+                <div class="skill-grid staggered-animation-container">
+                    <div class="skill-card staggered-animation-item">
                         <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
                              alt="Strategic Planning" 
                              class="skill-image">
@@ -587,8 +963,8 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card">
-                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
+                    <div class="skill-card staggered-animation-item">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80" 
                              alt="Logistics Management" 
                              class="skill-image">
                         <div class="skill-overlay"></div>
@@ -607,7 +983,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card">
+                    <div class="skill-card staggered-animation-item">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
                              alt="Data Analysis" 
                              class="skill-image">
@@ -627,7 +1003,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card">
+                    <div class="skill-card staggered-animation-item">
                         <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
                              alt="Team Leadership" 
                              class="skill-image">
@@ -647,7 +1023,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card">
+                    <div class="skill-card staggered-animation-item">
                         <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
                              alt="Project Management" 
                              class="skill-image">
@@ -667,7 +1043,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card">
+                    <div class="skill-card staggered-animation-item">
                         <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
                              alt="Risk Management" 
                              class="skill-image">
@@ -695,8 +1071,8 @@
                     Thành tựu nổi bật
                 </h3>
                 
-                <div class="achievement-grid">
-                    <div class="achievement-card">
+                <div class="achievement-grid staggered-animation-container">
+                    <div class="achievement-card staggered-animation-item">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
                              alt="Efficiency Increase" 
                              class="achievement-image">
@@ -716,7 +1092,7 @@
                         </div>
                     </div>
                     
-                    <div class="achievement-card">
+                    <div class="achievement-card staggered-animation-item">
                         <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
                              alt="Team Management" 
                              class="achievement-image">
@@ -736,7 +1112,7 @@
                         </div>
                     </div>
                     
-                    <div class="achievement-card">
+                    <div class="achievement-card staggered-animation-item">
                         <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
                              alt="Excellence Award" 
                              class="achievement-image">
@@ -759,8 +1135,77 @@
             </div>
         </div>
 
+        <!-- Partners Section -->
+        <div class="glass-effect rounded-3xl p-8 mb-12 fade-in">
+            <h3 class="text-2xl font-bold text-white mb-6" data-vi="Đối tác & Khách hàng" data-en="Partners & Clients" data-zh="合作伙伴和客户">
+                Đối tác & Khách hàng
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 staggered-animation-container">
+                <div class="partner-logo-wrapper staggered-animation-item">
+                    <img src="https://picsum.photos/seed/partner1/150/80" alt="Partner 1" class="partner-logo">
+                </div>
+                <div class="partner-logo-wrapper staggered-animation-item">
+                    <img src="https://picsum.photos/seed/partner2/150/80" alt="Partner 2" class="partner-logo">
+                </div>
+                <div class="partner-logo-wrapper staggered-animation-item">
+                    <img src="https://picsum.photos/seed/partner3/150/80" alt="Partner 3" class="partner-logo">
+                </div>
+                <div class="partner-logo-wrapper staggered-animation-item">
+                    <img src="https://picsum.photos/seed/partner4/150/80" alt="Partner 4" class="partner-logo">
+                </div>
+            </div>
+            
+            <!-- Testimonials -->
+            <div class="swiper testimonials-slider staggered-animation-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-card staggered-animation-item">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" 
+                                 alt="Client 1" 
+                                 class="testimonial-avatar">
+                            <div>
+                                <h5 class="testimonial-author">Nguyễn Văn A</h5>
+                                <p class="testimonial-role">CEO, Công ty ABC</p>
+                            </div>
+                            <p class="testimonial-text">"Ratraco đã giúp chúng tôi tối ưu hóa chuỗi cung ứng và giảm chi phí vận chuyển đáng kể."</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card staggered-animation-item">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" 
+                                 alt="Client 2" 
+                                 class="testimonial-avatar">
+                            <div>
+                                <h5 class="testimonial-author">Trần Thị B</h5>
+                                <p class="testimonial-role">Giám đốc Logistics, XYZ Corp</p>
+                            </div>
+                            <p class="testimonial-text">"Dịch vụ chuyên nghiệp và đội ngũ hỗ trợ nhiệt tình. Rất hài lòng với sự hợp tác."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+
+        <!-- Download Profile Section -->
+        <div class="glass-effect rounded-3xl p-8 mb-12 text-center fade-in">
+            <h3 class="text-2xl font-bold text-white mb-4" data-vi="Tải hồ sơ năng lực" data-en="Download Company Profile" data-zh="下载公司简介">
+                Tải hồ sơ năng lực
+            </h3>
+            <p class="text-gray-200 mb-6" data-vi="Tìm hiểu thêm về Ratraco Transport qua hồ sơ năng lực chi tiết" 
+               data-en="Learn more about Ratraco Transport through our detailed company profile" 
+               data-zh="通过我们详细的公司简介了解更多关于Ratraco运输的信息">
+                Tìm hiểu thêm về Ratraco Transport qua hồ sơ năng lực chi tiết
+            </p>
+            <a href="/company-profile.pdf" download 
+               class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 scale-in">
+                <i class="fas fa-download mr-2"></i>
+                <span data-vi="Tải xuống PDF" data-en="Download PDF" data-zh="下载PDF">Tải xuống PDF</span>
+            </a>
+        </div>
+
         <!-- Footer -->
-        <div class="text-center glass-effect rounded-3xl p-8 card-hover" id="contact">
+        <div class="text-center glass-effect rounded-3xl p-8 card-hover fade-in" id="contact">
             <h3 class="text-2xl font-bold text-white mb-4" data-vi="Liên hệ để hợp tác" data-en="Contact for Collaboration" data-zh="联系合作">
                 Liên hệ để hợp tác
             </h3>
@@ -795,36 +1240,101 @@
     </div>
 
     <script>
-        let currentLang = 'vi';
-        
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('block');
+        // Loading Screen
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
         });
 
-        // Back to Top button logic
-        const backToTopButton = document.getElementById('back-to-top');
+        // Initialize Swiper Sliders
+        const companySlider = new Swiper('.company-slider', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 200) { // Show button after scrolling 200px
-                backToTopButton.classList.remove('opacity-0');
-                backToTopButton.classList.add('opacity-100');
+        const testimonialsSlider = new Swiper('.testimonials-slider', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+            },
+        });
+
+        // Dynamic Favicon Animation
+        let favicon = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        favicon.type = 'image/x-icon';
+        favicon.rel = 'shortcut icon';
+        favicon.href = '/favicon.ico';
+        document.getElementsByTagName('head')[0].appendChild(favicon);
+
+        let isAnimating = false;
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                favicon.classList.add('favicon-animation');
+                isAnimating = true;
             } else {
-                backToTopButton.classList.remove('opacity-100');
-                backToTopButton.classList.add('opacity-0');
+                favicon.classList.remove('favicon-animation');
+                isAnimating = false;
             }
         });
 
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+        let currentLang = 'vi';
+        
+        // Mobile menu toggle
+        // const mobileMenuButton = document.getElementById('mobile-menu-button'); // Moved to DOMContentLoaded
+        // const mobileMenu = document.getElementById('mobile-menu'); // Moved to DOMContentLoaded
+
+        // mobileMenuButton.addEventListener('click', () => { // Moved to DOMContentLoaded
+        //     mobileMenu.classList.toggle('hidden');
+        //     mobileMenu.classList.toggle('block');
+        // });
+
+        // Back to Top button logic
+        // const backToTopButton = document.getElementById('back-to-top'); // Moved to DOMContentLoaded
+
+        // window.addEventListener('scroll', () => { // Moved to DOMContentLoaded
+        //     if (window.scrollY > 200) { // Show button after scrolling 200px
+        //         backToTopButton.classList.remove('opacity-0');
+        //         backToTopButton.classList.add('opacity-100');
+        //     } else {
+        //         backToTopButton.classList.remove('opacity-100');
+        //         backToTopButton.classList.add('opacity-0');
+        //     }
+        // });
+
+        // backToTopButton.addEventListener('click', () => { // Moved to DOMContentLoaded
+        //     window.scrollTo({
+        //         top: 0,
+        //         behavior: 'smooth'
+        //     });
+        // });
         
         // Language switching function
         function changeLanguage(lang) {
@@ -849,17 +1359,52 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Set initial language
             changeLanguage('vi');
+
+            // Mobile menu toggle (moved here)
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    mobileMenu.classList.toggle('block');
+                });
+            }
+
+            // Back to Top button logic (moved here)
+            const backToTopButton = document.getElementById('back-to-top');
+
+            if (backToTopButton) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 200) { // Show button after scrolling 200px
+                        backToTopButton.classList.remove('opacity-0');
+                        backToTopButton.classList.add('opacity-100');
+                    } else {
+                        backToTopButton.classList.remove('opacity-100');
+                        backToTopButton.classList.add('opacity-0');
+                    }
+                });
+
+                backToTopButton.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
             
             // Animate skill bars (now handled by IntersectionObserver below)
             // animateSkillBars(); 
             
             // Add staggered animation to cards
-            const cards = document.querySelectorAll('.card-hover');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = (index * 0.2) + 's';
-            });
+            // const cards = document.querySelectorAll('.card-hover');
+            // cards.forEach((card, index) => {
+            //     card.style.animationDelay = (index * 0.2) + 's';
+            // });
             
-            // Add scroll animations for fade-in and slide-in-left
+            // Animate elements on scroll with IntersectionObserver
+            const animateOnScrollElements = document.querySelectorAll('.fade-in, .slide-in-left, .scale-in');
+            
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -869,11 +1414,12 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target); // Stop observing once animated
                     }
                 });
             }, observerOptions);
             
-            document.querySelectorAll('.fade-in, .slide-in-left').forEach(el => {
+            animateOnScrollElements.forEach(el => {
                 observer.observe(el);
             });
 
@@ -894,6 +1440,32 @@
 
             skillBars.forEach(bar => {
                 skillObserver.observe(bar);
+            });
+
+            // Staggered Animations
+            const staggeredContainers = document.querySelectorAll('.staggered-animation-container');
+
+            const staggeredObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const items = entry.target.querySelectorAll('.staggered-animation-item');
+                        items.forEach((item, index) => {
+                            item.style.transitionDelay = (index * 0.1) + 's'; // Use transitionDelay
+                            item.classList.add('is-visible'); // Add is-visible class
+                        });
+                        staggeredObserver.unobserve(entry.target); // Stop observing once animated
+                    } else {
+                        // Optional: remove 'is-visible' if element scrolls out of view and you want to re-animate
+                        // const items = entry.target.querySelectorAll('.staggered-animation-item');
+                        // items.forEach(item => {
+                        //     item.classList.remove('is-visible');
+                        // });
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            staggeredContainers.forEach(container => {
+                staggeredObserver.observe(container);
             });
 
             // Add 3D hover effect to achievement cards
@@ -948,7 +1520,9 @@
                 });
 
                 // Close mobile menu after clicking a link
-                if (mobileMenu.classList.contains('block')) {
+                // This part depends on mobileMenu being defined, so it's safer inside DOMContentLoaded
+                const mobileMenu = document.getElementById('mobile-menu'); // Re-get inside event listener if needed
+                if (mobileMenu && mobileMenu.classList.contains('block')) {
                     mobileMenu.classList.remove('block');
                     mobileMenu.classList.add('hidden');
                 }
