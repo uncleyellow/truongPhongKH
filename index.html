@@ -562,8 +562,9 @@
         .partner-logo {
             max-height: 4rem; /* Adjusted for better visibility */
             width: auto;
-            filter: grayscale(100%) brightness(150%); /* Subtle grayscale */
-            opacity: 0.7;
+            object-fit: contain; /* Ensure the image fits within the container without distortion */
+            filter: grayscale(80%) brightness(120%); /* Softer grayscale */
+            opacity: 0.8;
             transition: all 0.3s ease;
         }
 
@@ -1142,16 +1143,16 @@
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 staggered-animation-container">
                 <div class="partner-logo-wrapper staggered-animation-item">
-                    <img src="https://picsum.photos/seed/partner1/150/80" alt="Partner 1" class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Honda.svg" alt="Honda" class="partner-logo">
                 </div>
                 <div class="partner-logo-wrapper staggered-animation-item">
-                    <img src="https://picsum.photos/seed/partner2/150/80" alt="Partner 2" class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Yamaha_logo.svg" alt="Yamaha" class="partner-logo">
                 </div>
                 <div class="partner-logo-wrapper staggered-animation-item">
-                    <img src="https://picsum.photos/seed/partner3/150/80" alt="Partner 3" class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Porsche_hood_emblem.png" alt="Porsche" class="partner-logo">
                 </div>
                 <div class="partner-logo-wrapper staggered-animation-item">
-                    <img src="https://picsum.photos/seed/partner4/150/80" alt="Partner 4" class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" alt="BMW" class="partner-logo">
                 </div>
             </div>
             
@@ -1182,8 +1183,86 @@
                             <p class="testimonial-text">"Dịch vụ chuyên nghiệp và đội ngũ hỗ trợ nhiệt tình. Rất hài lòng với sự hợp tác."</p>
                         </div>
                     </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card staggered-animation-item">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" 
+                                 alt="Client 3" 
+                                 class="testimonial-avatar">
+                            <div>
+                                <h5 class="testimonial-author">Lê Văn C</h5>
+                                <p class="testimonial-role">Trưởng phòng Chuỗi cung ứng, DEF Logistics</p>
+                            </div>
+                            <p class="testimonial-text">"Khả năng thích ứng nhanh chóng và giải pháp linh hoạt của Ratraco là chìa khóa cho thành công của chúng tôi."
+                            </p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card staggered-animation-item">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" 
+                                 alt="Client 4" 
+                                 class="testimonial-avatar">
+                            <div>
+                                <h5 class="testimonial-author">Phạm Thị D</h5>
+                                <p class="testimonial-role">Giám đốc Vận hành, GHI Solutions</p>
+                            </div>
+                            <p class="testimonial-text">"Tôi thực sự ấn tượng với sự tận tâm và chuyên nghiệp của đội ngũ Ratraco. Dịch vụ tuyệt vời!"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card staggered-animation-item">
+                            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" 
+                                 alt="Client 5" 
+                                 class="testimonial-avatar">
+                            <div>
+                                <h5 class="testimonial-author">Nguyễn Thị E</h5>
+                                <p class="testimonial-role">Chủ tịch, Logistics FGH</p>
+                            </div>
+                            <p class="testimonial-text">"Ratraco không chỉ là đối tác, mà còn là một phần không thể thiếu trong sự phát triển của chúng tôi."
+                            </p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card staggered-animation-item">
+                            <img src="https://images.unsplash.com/photo-1547425260-76bc0fa6464d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" 
+                                 alt="Client 6" 
+                                 class="testimonial-avatar">
+                            <div>
+                                <h5 class="testimonial-author">Trần Văn G</h5>
+                                <p class="testimonial-role">Giám đốc Điều hành, Vận tải IJK</p>
+                            </div>
+                            <p class="testimonial-text">"Sự đổi mới và hiệu quả trong từng giải pháp của Ratraco luôn khiến chúng tôi bất ngờ và hài lòng."
+                            </p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card staggered-animation-item">
+                            <img src="https://images.unsplash.com/photo-1599566150163-c7827e69176b?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" 
+                                 alt="Client 7" 
+                                 class="testimonial-avatar">
+                            <div>
+                                <h5 class="testimonial-author">Hoàng Kim H</h5>
+                                <p class="testimonial-role">Chuyên viên Mua hàng, Công ty LMN</p>
+                            </div>
+                            <p class="testimonial-text">"Với Ratraco, mọi lô hàng đều được xử lý nhanh chóng và an toàn. Rất tin tưởng!"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card staggered-animation-item">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" 
+                                 alt="Client 8" 
+                                 class="testimonial-avatar">
+                            <div>
+                                <h5 class="testimonial-author">Đỗ Trung I</h5>
+                                <p class="testimonial-role">Trưởng phòng Kế hoạch, OPR Group</p>
+                            </div>
+                            <p class="testimonial-text">"Giải pháp vận tải của Ratraco đã giúp chúng tôi tiết kiệm đáng kể chi phí và thời gian."
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="swiper-pagination"></div>
+                <div class="swiper-pagination relative top-1"></div>
             </div>
         </div>
 
