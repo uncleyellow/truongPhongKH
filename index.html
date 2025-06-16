@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trưởng phòng Kế hoạch - Ratraco Transport</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #FF7E5F 0%, #FEB47B 100%); /* Orange gradient */
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .floating-animation {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #FFA07A, #FF6347); /* Orange/Red Gradient for text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .skill-bar {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: inherit;
+            transition: width 2s ease-out;
+            width: 0%;
+        }
+        
+        .lang-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lang-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .lang-btn:hover::before {
+            left: 100%;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .skill-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .skill-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 1rem 1rem 0 0;
+            transition: transform 0.4s ease;
+        }
+        
+        .skill-card:hover .skill-image {
+            transform: scale(1.05);
+        }
+        
+        .skill-content {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .skill-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .skill-card:hover .skill-overlay {
+            opacity: 1;
+        }
+        
+        .skill-progress-container {
+            position: relative;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .skill-progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .achievement-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .achievement-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 1rem 1rem 0 0;
+            transition: transform 0.6s ease;
+        }
+        
+        .achievement-card:hover .achievement-image {
+            transform: scale(1.1);
+        }
+        
+        .achievement-content {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .achievement-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            z-index: 2;
+        }
+        
+        .achievement-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .achievement-card:hover .achievement-overlay {
+            opacity: 1;
+        }
+        
+        .company-name {
+            position: relative;
+            display: inline-block;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            margin-bottom: 1rem;
+        }
+        
+        .company-name::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 0.5rem;
+            padding: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-btn.facebook {
+            background: linear-gradient(45deg, #1877f2, #0d6efd);
+        }
+        
+        .social-btn.zalo {
+            background: linear-gradient(45deg, #0068ff, #00a3ff);
+        }
+        
+        .social-btn i {
+            font-size: 1.25rem;
+        }
+        
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            height: 100%;
+        }
+        
+        .skill-card {
+            height: calc(100% - 1.5rem);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .skill-image {
+            height: 180px;
+        }
+        
+        .skill-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .skill-progress-container {
+            margin-top: auto;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius:  2rem;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+        
+        .email-bg {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+        .email-bg:hover {
+            background: linear-gradient(45deg, #5a6ed0, #693e92);
+        }
+
+        .phone-bg {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+        .phone-bg:hover {
+            background: linear-gradient(45deg, #24913e, #1cae82);
+        }
+
+        .zalo-bg {
+            background-color: #0068FF;
+        }
+        .zalo-bg:hover {
+            background-color: #0056D4;
+        }
+
+        .facebook-bg {
+            background-color: #1877F2;
+        }
+        .facebook-bg:hover {
+            background-color: #1562C7;
+        }
+    </style>
+</head>
+<body class="min-h-screen gradient-bg">
+    <!-- Navbar -->
+    <nav class="glass-effect fixed top-0 z-50 w-full p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white text-2xl font-bold tracking-wider" data-vi="Trang chủ" data-en="Home" data-zh="主页">Trang chủ</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#profile" class="text-white text-lg hover:text-gray-200 transition-colors duration-300" data-vi="Thông tin" data-en="Profile" data-zh="个人信息">Thông tin</a>
+                <a href="#skills" class="text-white text-lg hover:text-gray-200 transition-colors duration-300" data-vi="Kỹ năng" data-en="Skills" data-zh="技能">Kỹ năng</a>
+                <a href="#achievements" class="text-white text-lg hover:text-gray-200 transition-colors duration-300" data-vi="Thành tựu" data-en="Achievements" data-zh="成就">Thành tựu</a>
+                <a href="#contact" class="text-white text-lg hover:text-gray-200 transition-colors duration-300" data-vi="Liên hệ" data-en="Contact" data-zh="联系">Liên hệ</a>
+            </div>
+            <!-- Language Selector - Desktop -->
+            <div class="hidden md:flex space-x-2 ml-8">
+                <button onclick="changeLanguage('vi')" class="lang-btn px-3 py-2 bg-white bg-opacity-20 text-white rounded-lg hover:bg-opacity-30 transition-all duration-300" id="vi-btn">
+                    🇻🇳 VI
+                </button>
+                <button onclick="changeLanguage('en')" class="lang-btn px-3 py-2 bg-white bg-opacity-20 text-white rounded-lg hover:bg-opacity-30 transition-all duration-300" id="en-btn">
+                    🇺🇸 EN
+                </button>
+                <button onclick="changeLanguage('zh')" class="lang-btn px-3 py-2 bg-white bg-opacity-20 text-white rounded-lg hover:bg-opacity-30 transition-all duration-300" id="zh-btn">
+                    🇨🇳 中文
+                </button>
+            </div>
+            <!-- Mobile menu button -->
+            <button class="md:hidden text-white text-2xl focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden absolute top-full left-0 w-full bg-gray-800 bg-opacity-90 py-4 hidden" id="mobile-menu">
+            <a href="#profile" class="block text-white px-4 py-2 hover:bg-gray-700" data-vi="Thông tin" data-en="Profile" data-zh="个人信息">Thông tin</a>
+            <a href="#skills" class="block text-white px-4 py-2 hover:bg-gray-700" data-vi="Kỹ năng" data-en="Skills" data-zh="技能">Kỹ năng</a>
+            <a href="#achievements" class="block text-white px-4 py-2 hover:bg-gray-700" data-vi="Thành tựu" data-en="Achievements" data-zh="成就">Thành tựu</a>
+            <a href="#contact" class="block text-white px-4 py-2 hover:bg-gray-700" data-vi="Liên hệ" data-en="Contact" data-zh="联系">Liên hệ</a>
+            <!-- Language Selector - Mobile -->
+            <div class="flex justify-center space-x-2 mt-4">
+                <button onclick="changeLanguage('vi')" class="lang-btn px-3 py-2 bg-white bg-opacity-20 text-white rounded-lg hover:bg-opacity-30 transition-all duration-300" id="vi-btn">
+                    🇻🇳 VI
+                </button>
+                <button onclick="changeLanguage('en')" class="lang-btn px-3 py-2 bg-white bg-opacity-20 text-white rounded-lg hover:bg-opacity-30 transition-all duration-300" id="en-btn">
+                    🇺🇸 EN
+                </button>
+                <button onclick="changeLanguage('zh')" class="lang-btn px-3 py-2 bg-white bg-opacity-20 text-white rounded-lg hover:bg-opacity-30 transition-all duration-300" id="zh-btn">
+                    🇨🇳 中文
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 py-8 max-w-6xl relative top-20">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-12 fade-in">
+            <div class="inline-block">
+                <!-- <div class="company-name mb-4" data-vi="Ratraco Transport" data-en="Ratraco Transport" data-zh="Ratraco运输">
+                    Ratraco Transport
+                </div> -->
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 text-gradient" data-vi="Trưởng phòng Kế hoạch" data-en="Planning Department Manager" data-zh="计划部经理">
+                    Trưởng phòng Kế hoạch
+                </h1>
+                <div class="w-24 h-1 bg-white mx-auto rounded-full opacity-70"></div>
+            </div>
+            <p class="text-xl text-white opacity-90 mt-4 max-w-2xl mx-auto" data-vi="Công ty Vận tải Ratraco" data-en="Ratraco Transport Company" data-zh="Ratraco运输公司">
+                Công ty Vận tải Ratraco
+            </p>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="grid lg:grid-cols-3 gap-8 mb-12" id="profile">
+            <!-- Profile Image & Basic Info -->
+            <div class="lg:col-span-1">
+                <div class="glass-effect rounded-3xl p-8 card-hover floating-animation">
+                    <div class="text-center">
+                        <div class="w-48 h-48 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 p-1">
+                            <div class="w-full h-full rounded-full bg-gray-300 flex items-center justify-center">
+                                <i class="fas fa-user text-6xl text-gray-600"></i>
+                            </div>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white mb-2" data-vi="Nguyễn Văn Minh" data-en="Nguyen Van Minh" data-zh="阮文明">
+                            Nguyễn Văn Minh
+                        </h2>
+                        <p class="text-white mb-4" data-vi="Trưởng phòng Kế hoạch" data-en="Planning Department Manager" data-zh="计划部经理">
+                            Trưởng phòng Kế hoạch
+                        </p>
+                        <div class="flex justify-center space-x-4">
+                            <div class="w-3 h-3 bg-green-400 rounded-full pulse-dot"></div>
+                            <span class="text-gray-200 text-sm" data-vi="Đang hoạt động" data-en="Active" data-zh="在线">Đang hoạt động</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Information -->
+            <div class="lg:col-span-2">
+                <div class="glass-effect rounded-3xl p-8 card-hover slide-in-left">
+                    <h3 class="text-2xl font-bold text-white mb-6" data-vi="Thông tin chi tiết" data-en="Detailed Information" data-zh="详细信息">
+                        Thông tin chi tiết
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-briefcase text-white text-xl w-6"></i>
+                                <div>
+                                    <p class="text-gray-200 text-sm" data-vi="Kinh nghiệm" data-en="Experience" data-zh="经验">Kinh nghiệm</p>
+                                    <p class="text-white font-semibold" data-vi="8+ năm trong lĩnh vực vận tải" data-en="8+ years in transportation" data-zh="8年以上运输经验">8+ năm trong lĩnh vực vận tải</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-graduation-cap text-white text-xl w-6"></i>
+                                <div>
+                                    <p class="text-gray-200 text-sm" data-vi="Học vấn" data-en="Education" data-zh="学历">Học vấn</p>
+                                    <p class="text-white font-semibold" data-vi="Thạc sĩ Quản trị Kinh doanh" data-en="Master of Business Administration" data-zh="工商管理硕士">Thạc sĩ Quản trị Kinh doanh</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-award text-white text-xl w-6"></i>
+                                <div>
+                                    <p class="text-gray-200 text-sm" data-vi="Chứng chỉ" data-en="Certification" data-zh="认证">Chứng chỉ</p>
+                                    <p class="text-white font-semibold" data-vi="PMP, Lean Six Sigma" data-en="PMP, Lean Six Sigma" data-zh="PMP, 精益六西格玛">PMP, Lean Six Sigma</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-envelope text-white text-xl w-6"></i>
+                                <div>
+                                    <p class="text-gray-200 text-sm">Email</p>
+                                    <p class="text-white font-semibold">minh.nv@ratraco.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-phone text-white text-xl w-6"></i>
+                                <div>
+                                    <p class="text-gray-200 text-sm" data-vi="Điện thoại" data-en="Phone" data-zh="电话">Điện thoại</p>
+                                    <p class="text-white font-semibold">+84 987 654 321</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-map-marker-alt text-white text-xl w-6"></i>
+                                <div>
+                                    <p class="text-gray-200 text-sm" data-vi="Văn phòng" data-en="Office" data-zh="办公室">Văn phòng</p>
+                                    <p class="text-white font-semibold" data-vi="Tầng 12, Tòa nhà Ratraco" data-en="12th Floor, Ratraco Building" data-zh="Ratraco大厦12楼">Tầng 12, Tòa nhà Ratraco</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-globe text-white text-xl w-6"></i>
+                                <div>
+                                    <p class="text-gray-200 text-sm" data-vi="Website Công ty" data-en="Company Website" data-zh="公司网站">Website Công ty</p>
+                                    <p class="text-white font-semibold"><a href="https://www.ratraco.com" target="_blank" class="text-white hover:underline">www.ratraco.com</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills & Expertise -->
+        <div class="grid lg:grid-cols-2 gap-8 mb-12" id="skills">
+            <div class="glass-effect rounded-3xl p-8">
+                <h3 class="text-2xl font-bold text-white mb-6" data-vi="Kỹ năng chuyên môn" data-en="Professional Skills" data-zh="专业技能">
+                    Kỹ năng chuyên môn
+                </h3>
+                
+                <div class="skill-grid">
+                    <div class="skill-card">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
+                             alt="Strategic Planning" 
+                             class="skill-image">
+                        <div class="skill-overlay"></div>
+                        <div class="skill-content">
+                            <h4 class="text-white font-semibold mb-2" data-vi="Lập kế hoạch chiến lược" data-en="Strategic Planning" data-zh="战略规划">
+                                Lập kế hoạch chiến lược
+                            </h4>
+                            <div class="skill-progress-container">
+                                <div class="skill-progress-bar" style="width: 95%"></div>
+                            </div>
+                            <p class="text-gray-200 text-sm mt-2" data-vi="Phát triển và thực hiện chiến lược kinh doanh hiệu quả" 
+                               data-en="Developing and implementing effective business strategies" 
+                               data-zh="制定和实施有效的商业战略">
+                                Phát triển và thực hiện chiến lược kinh doanh hiệu quả
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
+                             alt="Logistics Management" 
+                             class="skill-image">
+                        <div class="skill-overlay"></div>
+                        <div class="skill-content">
+                            <h4 class="text-white font-semibold mb-2" data-vi="Quản lý logistics" data-en="Logistics Management" data-zh="物流管理">
+                                Quản lý logistics
+                            </h4>
+                            <div class="skill-progress-container">
+                                <div class="skill-progress-bar" style="width: 90%"></div>
+                            </div>
+                            <p class="text-gray-200 text-sm mt-2" data-vi="Tối ưu hóa chuỗi cung ứng và quản lý vận chuyển" 
+                               data-en="Optimizing supply chain and transportation management" 
+                               data-zh="优化供应链和运输管理">
+                                Tối ưu hóa chuỗi cung ứng và quản lý vận chuyển
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
+                             alt="Data Analysis" 
+                             class="skill-image">
+                        <div class="skill-overlay"></div>
+                        <div class="skill-content">
+                            <h4 class="text-white font-semibold mb-2" data-vi="Phân tích dữ liệu" data-en="Data Analysis" data-zh="数据分析">
+                                Phân tích dữ liệu
+                            </h4>
+                            <div class="skill-progress-container">
+                                <div class="skill-progress-bar" style="width: 88%"></div>
+                            </div>
+                            <p class="text-gray-200 text-sm mt-2" data-vi="Phân tích và trực quan hóa dữ liệu để ra quyết định" 
+                               data-en="Analyzing and visualizing data for decision making" 
+                               data-zh="分析和可视化数据以支持决策">
+                                Phân tích và trực quan hóa dữ liệu để ra quyết định
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
+                             alt="Team Leadership" 
+                             class="skill-image">
+                        <div class="skill-overlay"></div>
+                        <div class="skill-content">
+                            <h4 class="text-white font-semibold mb-2" data-vi="Lãnh đạo nhóm" data-en="Team Leadership" data-zh="团队领导">
+                                Lãnh đạo nhóm
+                            </h4>
+                            <div class="skill-progress-container">
+                                <div class="skill-progress-bar" style="width: 92%"></div>
+                            </div>
+                            <p class="text-gray-200 text-sm mt-2" data-vi="Xây dựng và phát triển đội ngũ hiệu quả" 
+                               data-en="Building and developing effective teams" 
+                               data-zh="建立和发展高效团队">
+                                Xây dựng và phát triển đội ngũ hiệu quả
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
+                             alt="Project Management" 
+                             class="skill-image">
+                        <div class="skill-overlay"></div>
+                        <div class="skill-content">
+                            <h4 class="text-white font-semibold mb-2" data-vi="Quản lý dự án" data-en="Project Management" data-zh="项目管理">
+                                Quản lý dự án
+                            </h4>
+                            <div class="skill-progress-container">
+                                <div class="skill-progress-bar" style="width: 85%"></div>
+                            </div>
+                            <p class="text-gray-200 text-sm mt-2" data-vi="Quản lý và triển khai các dự án vận tải quy mô lớn" 
+                               data-en="Managing and implementing large-scale transportation projects" 
+                               data-zh="管理和实施大型运输项目">
+                                Quản lý và triển khai các dự án vận tải quy mô lớn
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
+                             alt="Risk Management" 
+                             class="skill-image">
+                        <div class="skill-overlay"></div>
+                        <div class="skill-content">
+                            <h4 class="text-white font-semibold mb-2" data-vi="Quản lý rủi ro" data-en="Risk Management" data-zh="风险管理">
+                                Quản lý rủi ro
+                            </h4>
+                            <div class="skill-progress-container">
+                                <div class="skill-progress-bar" style="width: 87%"></div>
+                            </div>
+                            <p class="text-gray-200 text-sm mt-2" data-vi="Đánh giá và giảm thiểu rủi ro trong hoạt động vận tải" 
+                               data-en="Assessing and mitigating risks in transportation operations" 
+                               data-zh="评估和降低运输运营风险">
+                                Đánh giá và giảm thiểu rủi ro trong hoạt động vận tải
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="glass-effect rounded-3xl p-8" id="achievements">
+                <h3 class="text-2xl font-bold text-white mb-6" data-vi="Thành tựu nổi bật" data-en="Key Achievements" data-zh="主要成就">
+                    Thành tựu nổi bật
+                </h3>
+                
+                <div class="achievement-grid">
+                    <div class="achievement-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
+                             alt="Efficiency Increase" 
+                             class="achievement-image">
+                        <div class="achievement-overlay"></div>
+                        <div class="achievement-icon">
+                            <i class="fas fa-chart-line text-white text-xl"></i>
+                        </div>
+                        <div class="achievement-content">
+                            <h4 class="text-white font-semibold mb-2" data-vi="Tăng hiệu quả 35%" data-en="35% Efficiency Increase" data-zh="效率提升35%">
+                                Tăng hiệu quả 35%
+                            </h4>
+                            <p class="text-gray-200 text-sm" data-vi="Cải thiện quy trình vận chuyển và giảm chi phí" 
+                               data-en="Improved transportation processes and reduced costs" 
+                               data-zh="改善运输流程并降低成本">
+                                Cải thiện quy trình vận chuyển và giảm chi phí
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
+                             alt="Team Management" 
+                             class="achievement-image">
+                        <div class="achievement-overlay"></div>
+                        <div class="achievement-icon">
+                            <i class="fas fa-users text-white text-xl"></i>
+                        </div>
+                        <div class="achievement-content">
+                            <h4 class="text-white font-semibold mb-2" data-vi="Quản lý 50+ nhân viên" data-en="Managing 50+ Employees" data-zh="管理50+员工">
+                                Quản lý 50+ nhân viên
+                            </h4>
+                            <p class="text-gray-200 text-sm" data-vi="Lãnh đạo đội ngũ đa chức năng hiệu quả" 
+                               data-en="Leading cross-functional teams effectively" 
+                               data-zh="有效领导跨职能团队">
+                                Lãnh đạo đội ngũ đa chức năng hiệu quả
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80" 
+                             alt="Excellence Award" 
+                             class="achievement-image">
+                        <div class="achievement-overlay"></div>
+                        <div class="achievement-icon">
+                            <i class="fas fa-trophy text-white text-xl"></i>
+                        </div>
+                        <div class="achievement-content">
+                            <h4 class="text-white font-semibold mb-2" data-vi="Giải thưởng xuất sắc 2023" data-en="Excellence Award 2023" data-zh="2023年优秀奖">
+                                Giải thưởng xuất sắc 2023
+                            </h4>
+                            <p class="text-gray-200 text-sm" data-vi="Nhận giải nhân viên xuất sắc của năm" 
+                               data-en="Received Employee of the Year award" 
+                               data-zh="获得年度优秀员工奖">
+                                Nhận giải nhân viên xuất sắc của năm
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center glass-effect rounded-3xl p-8 card-hover" id="contact">
+            <h3 class="text-2xl font-bold text-white mb-4" data-vi="Liên hệ để hợp tác" data-en="Contact for Collaboration" data-zh="联系合作">
+                Liên hệ để hợp tác
+            </h3>
+            <p class="text-gray-200 mb-6" data-vi="Sẵn sàng thảo luận về các dự án vận tải và logistics" 
+               data-en="Ready to discuss transportation and logistics projects" 
+               data-zh="准备讨论运输和物流项目">
+                Sẵn sàng thảo luận về các dự án vận tải và logistics
+            </p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mx-auto max-w-lg">
+                <a href="mailto:minh.nv@ratraco.com" class="contact-btn email-bg">
+                    <i class="fas fa-envelope mr-2"></i>
+                    <span data-vi="Gửi Email" data-en="Send Email" data-zh="发送邮件">Gửi Email</span>
+                </a>
+                
+                <a href="tel:+84987654321" class="contact-btn phone-bg">
+                    <i class="fas fa-phone mr-2"></i>
+                    <span data-vi="Gọi điện" data-en="Call Now" data-zh="立即致电">Gọi điện</span>
+                </a>
+                
+                <a href="https://zalo.me/your-zalo-id" target="_blank" class="contact-btn zalo-bg">
+                    <i class="fab fa-zalo"></i>
+                    <span data-vi="Zalo" data-en="Zalo" data-zh="Zalo">Zalo</span>
+                </a>
+                
+                <a href="https://facebook.com/your-facebook-page" target="_blank" class="contact-btn facebook-bg">
+                    <i class="fab fa-facebook-f"></i>
+                    <span data-vi="Facebook" data-en="Facebook" data-zh="Facebook">Facebook</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'vi';
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('block');
+        });
+
+        // Back to Top button logic
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) { // Show button after scrolling 200px
+                backToTopButton.classList.remove('opacity-0');
+                backToTopButton.classList.add('opacity-100');
+            } else {
+                backToTopButton.classList.remove('opacity-100');
+                backToTopButton.classList.add('opacity-0');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Language switching function
+        function changeLanguage(lang) {
+            currentLang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'bg-opacity-30', 'text-blue-600');
+                btn.classList.add('bg-white', 'bg-opacity-20', 'text-white');
+            });
+            
+            document.getElementById(lang + '-btn').classList.remove('bg-white', 'bg-opacity-20', 'text-white');
+            document.getElementById(lang + '-btn').classList.add('bg-white', 'bg-opacity-30', 'text-blue-600');
+            
+            // Update all text elements
+            document.querySelectorAll('[data-' + lang + ']').forEach(element => {
+                element.textContent = element.getAttribute('data-' + lang);
+            });
+        }
+        
+        // All initialization on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language
+            changeLanguage('vi');
+            
+            // Animate skill bars (now handled by IntersectionObserver below)
+            // animateSkillBars(); 
+            
+            // Add staggered animation to cards
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.2) + 's';
+            });
+            
+            // Add scroll animations for fade-in and slide-in-left
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.fade-in, .slide-in-left').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Animate skill progress bars on scroll
+            const skillBars = document.querySelectorAll('.skill-progress-bar');
+            const skillObserverOptions = {
+                threshold: 0.5,
+                rootMargin: '0px'
+            };
+
+            const skillObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.width = entry.target.parentElement.getAttribute('data-width') + '%';
+                    }
+                });
+            }, skillObserverOptions);
+
+            skillBars.forEach(bar => {
+                skillObserver.observe(bar);
+            });
+
+            // Add 3D hover effect to achievement cards
+            document.querySelectorAll('.achievement-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+                });
+            });
+
+            // Mobile menu optimization
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('.floating-animation').forEach(el => {
+                    el.classList.remove('floating-animation');
+                });
+            }
+
+            // Add Zalo icon if not available
+            if (!document.querySelector('.fa-zalo')) {
+                const style = document.createElement('style');
+                style.textContent = `
+                    .fa-zalo:before {
+                        content: 'Z';
+                        font-family: Arial, sans-serif;
+                        font-weight: bold;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        });
+
+        // Smooth scrolling for navigation links (moved inside DOMContentLoaded for better practice)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Close mobile menu after clicking a link
+                if (mobileMenu.classList.contains('block')) {
+                    mobileMenu.classList.remove('block');
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-gradient-to-r from-orange-500 to-red-500 text-white p-4 rounded-full shadow-lg opacity-0 transition-opacity duration-300 z-40">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+</body>
+</html>
